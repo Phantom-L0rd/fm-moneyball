@@ -32,8 +32,8 @@ def apply_role_score(df: pd.DataFrame, role_key: str, weights: dict, weight_vers
     minv = df['score_raw'].min()
     maxv = df['score_raw'].max()
     if maxv - minv == 0:
-        df['score'] = 0
+        df[f"{role_key.lower()}_score"] = 0
     else:
-        df['score'] = 100 * (df['score_raw'] - minv) / (maxv - minv)
+        df[f"{role_key.lower()}_score"] = 100 * (df['score_raw'] - minv) / (maxv - minv)
 
     return df

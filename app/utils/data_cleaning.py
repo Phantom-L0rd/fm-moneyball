@@ -67,6 +67,9 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     # Uniform column names
     df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')
 
+    # Drop the first row which have all null values
+    df = df.dropna(how='all')
+
     # remove duplicates
     df = df.drop_duplicates()
 
@@ -101,6 +104,7 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     df[['lf_val', 'rf_val']] =  df[['lf_val', 'rf_val']].apply(pd.to_numeric, errors='coerce')
 
     df['feet'] = df['lf_val'] + df['rf_val']
+    df['feet'] =df['feet'].apply(pd.to_numeric, errors='coerce')
 
     # spliting the transfer value into min and max value
     value_ranges = df['transfer_value'].apply(parse_value_range)

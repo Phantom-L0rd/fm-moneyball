@@ -14,7 +14,3 @@ def filter_by_budget(df: pd.DataFrame, max_million: float) -> pd.DataFrame:
     return df
 
 
-def filter_by_leagues(df: pd.DataFrame, leagues: list) -> pd.DataFrame:
-    if not leagues or 'All' in leagues:
-        return df
-    return df[df['league'].isin(leagues)]
